@@ -1,0 +1,16 @@
+<html5 lang = en>
+    <head>
+        <title> Twec App </title>
+        <meta charset="utf8">
+        <meta name = "author" context = "Marco Natali">
+    </head>
+    <body>
+        <form action = "{% url 'result' %}" method = "post">
+            {% csrf_token %}
+            {{ form }}
+            <input type = "reset" value = "reset">
+            <input type = "submit" value = "Train">
+        </form>
+    </body>
+</html5>
+
