@@ -5,11 +5,12 @@
         <meta name = "author" context = "Marco Natali">
     </head>
     <body>
-        <form action = "{% url 'result' %}" method = "post">
+        <form enctype = "multipart/form-data" action = "{% url 'index' %}" method = "post">
             {% csrf_token %}
-            {{ form }}
-            <input type = "reset" value = "reset">
-            <input type = "submit" value = "Train">
+            {{ formset }}
+            <input type = "submit">
+            <button type = "submit" formaction = "{% url 'add_document' %}"> Add new Document </button>
+            <input type = "reset">
         </form>
     </body>
 </html5>

@@ -1,22 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import TaskModelForm
+from django.core.files import File
+from .forms import DocumentModelFormSet, DocumentModelForm
+from .models import Document
 from twec.twec import TWEC
 from gensim.models.word2vec import Word2Vec
 
 # Create your views here.
 
-
+"""
+  Associate 
+"""
 def index(request):
     if request.method == 'POST':
-        form = TaskModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            train(form)
+        formset = DocumentModelFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            for form in formset:
+                form.save()
+            train(formset)
+            Document.objects.all().delete()#Reset Document queryset
             return HttpResponseRedirect('result.html')
     else:
-        form = TaskModelForm()
-    return render(request, 'index.html', {'form': form})    
+        formset = DocumentModelFormSet()
+    return render(request, 'index.html', {'formset': formset})    
 
 def train(form):
     aligner = TWEC(size=30, siter=10, diter=10, workers=4)
@@ -24,24 +30,23 @@ def train(form):
     mergeDocument(form)
     aligner.train_compass("compass.txt", overwrite = False)
 
-    slice_one = aligner.train_slice(form.field['document1'], save=True)
-    slice_two = aligner.train_slice(form.field['document2'], save=True)
+    for document in Document.objects.all():
+        slice_document = aligner.train_slice(document.document_path.path, save = True)
 
 def result(form):
     return HttpResponse("Hello World")
 
-def mergeDocument(form):
-    f1 = open(form.field['document1'], "r")
-    f1_contents = f1.read()
-    f1.close()
+def mergeDocument(formset):
+    contents = ""
+    for document in Document.objects.all():
+        with open(document.document_path.path, "r") as f:
+            contents += f.read()
+    file_merge = open("compass.txt", "w")
+    file_merge.write(contents)
+    file_merge.close()
 
-    f2 = open(form.field['document2'], "r")
-    f2_contents = f2.read()
-    f2.close()
-
-    f3 = open("compass.txt", "w")
-    f3.write(f1_contents + f2_contents)
-    f3.close()
-
-
-    
+def add_document(request):
+    if request.method == 'POST':
+        Document().save()
+        formset = DocumentModelFormSet()
+        return HttpResponseRedirect('../', {'formset': formset}) 
