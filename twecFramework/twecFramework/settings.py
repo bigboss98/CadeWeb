@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'background_task',
     'twecApp.apps.TwecappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,4 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # FIle handler management
-MEDIA_ROOT = "/home/bigboss98/Stage/Framework"
+MEDIA_ROOT = "twecApp/fileUpload/"

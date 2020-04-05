@@ -1,9 +1,12 @@
+"""
+    Urls configuration for twecApp application
+"""
 from django.urls import path
 from . import views
+from .views import TrainView
 
 urlpatterns = [
-        path('', views.index, name = 'index'),
-        path('result/', views.result, name = 'result'),
-        path('add_document/', views.add_document, name = 'add_document'),
+        path('', TrainView.as_view(), name='index'),
+        path('add_document/', views.add_document, name='add_document'),
+        path('remove_document/', views.remove_document, name='remove_document'),
 ]
-
