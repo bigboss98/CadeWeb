@@ -3,12 +3,10 @@
 """
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponseRedirect
-from background_task import background
-from twec.twec import TWEC
-from .models import Document, Configuration, Model
-from .forms import ConfigModelForm, DocumentModelFormSet
-from .preprocessing import SimpleSpacyCleaner
+from django.http import HttpResponseRedirect, HttpResponse
+from .models import Document, Configuration, Model, Task
+from .forms import ConfigModelForm, DocumentModelFormSet, TaskModelFormSet
+from .train import train
 
 
 class TrainView(View):
@@ -27,12 +25,12 @@ class TrainView(View):
             :param self:current object of TrainView
             :param request: request file
         """
-        docu_form = self.document_class()
+        docu_form = self.document_class(queryset = Document.objects.filter(task=Task.objects.last()))
         config_form = self.config_class()
         return render(request, 'index.html', {
             'config_form': config_form,
             'docu_form': docu_form,
-            'config_options': ['lowercasing', 'lemmatization', 'stemming', 'digit_masking']})
+            })
 
     def post(self, request):
         """
@@ -43,17 +41,17 @@ class TrainView(View):
         config_form = self.config_class(request.POST, request.FILES)
         docu_form = self.document_class(request.POST, request.FILES)
         config_form.save()
-        model = Model(config=Configuration.objects.last())
-        model.save()
+        task = Task(config = Configuration.objects.last())
+        task.save()
         if docu_form.is_valid():
             for doc in request.FILES:
-                model.document_set.create(document=request.FILES[doc])
-            model.save()
-        train(1)
-        Document.objects.all().delete()
-        return render(request, 'result.html', {'formset': docu_form})
+                task.document_set.create(document=request.FILES[doc])
+                Model(task=Task.objects.last()).save()
+            task.save()
+        train(task.num_task)
+        return render(request, 'task.html', {'formset': docu_form, 'task_form': task})
 
-def TaskView(View):
+class TaskView(View):
     """
         TaskView is a View class used for views task trained
         :param model_class: indicate name of Form class used
@@ -66,16 +64,21 @@ def TaskView(View):
             :param self:current object of TaskView
             :param request: request file
         """
-        task_form = self.model_class()
-        return render(request, 'task.html', {'task_form': task_form})
+        task_objects = Task.objects.all()
+        return render(request, 'task.html', {'task_objects': task_objects})
 
-def TaskDelete(View):
+class TaskDelete(View):
+
     model_class = TaskModelFormSet
 
     def post(self, request):
         task_form = self.model_class(request.POST)
+        task = Task.objects.get(num_task = request.POST['id'])
+        task.delete()
+        return HttpResponseRedirect('../', {})
 
-def TaskAdd(View):
+
+class TaskAdd(View):
     """
         TaskAdd is a View class used for create a new task
         :param model_class: indicate name of Form class used
@@ -84,53 +87,13 @@ def TaskAdd(View):
 
     def post(self, request):
         task_form = self.model_class(request.POST)
-        return render(request, 'index.html', {})
-
-def create_config_options(model):
-    options = {}
-    options['lemmatization'] = model.config.lemmatization
-    options['digit_masking'] = model.config.digit_masking
-    options['stemming'] = model.config.stemming
-    options['lowercasing'] = model.config.lowercasing
-    return options
-
-@background(schedule=10)
-def train(user_id):
-    preproc = SimpleSpacyCleaner("en_core_web_sm")
-    model = Model.objects.last()
-    config = create_config_options(model)
-    for document in model.document_set.all():
-        with open(document.document.path, "r") as doc:
-            contents = doc.read()
-        with open("compass.txt", "w") as doc:
-            doc.write(contents)
-            doc.write(preproc.clean(contents, config))
-    aligner = TWEC(size=30, siter=10, diter=10, workers=4)
-
-    merge_document(model)
-    aligner.train_compass("compass.txt", overwrite=False)
-
-    for document in model.document_set.all():
-        slice_document = aligner.train_slice(document.document.path, save=True)
-
-
-def merge_document(model):
-    contents = ""
-    for document in model.document_set.all():
-        with open(document.document.path, "r") as document_file:
-            contents += document_file.read()
-    file_merge = open("compass.txt", "w")
-    file_merge.write(contents)
-    file_merge.close()
+        return HttpResponseRedirect('../', {})
 
 def add_document(request):
     if request.method == 'POST':
-        config = Configuration()
-        config.save()
-        model = Model(config = config)
-        model.save()
-        Document(model=model).save()
-        docu_form = DocumentModelFormSet()
+        task = Task.objects.last()
+        task.document_set.create()
+        docu_form = DocumentModelFormSet(queryset=Document.objects.filter(task=task))
         config_form = ConfigModelForm()
     return HttpResponseRedirect('../', {'docu_form': docu_form, 'config_form': config_form})
 

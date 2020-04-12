@@ -21,7 +21,9 @@ class PreprocessingTestCase(TestCase):
             with open("Tests/Preprocessing/NoPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
                 text = self.spacy.clean(contents, config)
-                self.assertEqual(contents, text)
+            with open("Tests/Preprocessing/NoPreprocessing/result" + name_file, "r") as doc:
+                test_contents = doc.read()
+            self.assertEqual(test_contents, text)
 
     def test_preprocessing_lower(self):
         config = {
@@ -34,7 +36,9 @@ class PreprocessingTestCase(TestCase):
             with open("Tests/Preprocessing/LowerPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
                 text = self.spacy.clean(contents, config)
-                self.assertEqual(contents, text)
+            with open("Tests/Preprocessing/LowerPreprocessing/result" + name_file, "r") as doc:
+                test_contents = doc.read()
+            self.assertEqual(test_contents, text)
 
     def test_preprocessing_stemming(self):
         config = {
@@ -47,7 +51,9 @@ class PreprocessingTestCase(TestCase):
             with open("Tests/Preprocessing/StemmingPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
                 text = spacy.clean(contents, config)
-                self.assertEqual(contents, text)
+            with open("Tests/Preprocessing/StemmingPreprocessing/result" + name_file, "r") as doc:
+                test_contents = doc.read()
+            self.assertEqual(test_contents, text)
 
     def test_preprocessing_lemmatization(self):
         config = {
@@ -60,7 +66,9 @@ class PreprocessingTestCase(TestCase):
             with open("Tests/Preprocessing/LemmaPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
                 text = spacy.clean(contents, config)
-                self.assertEqual(contents, text)
+            with open("Tests/Preprocessing/LemmaPreprocessing/result" + name_file, "r") as doc:
+                test_contents = doc.read()
+            self.assertEqual(test_contents, text)
 
     def test_preprocessing_digit_masking(self):
         config = {
@@ -73,7 +81,9 @@ class PreprocessingTestCase(TestCase):
             with open("Tests/Preprocessing/DigitPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
                 text = spacy.clean(contents, config)
-                self.assertEqual(contents, text)
+            with open("Tests/Preprocessing/DigitPreprocessing/result" + name_file, "r") as doc:
+                test_contents = doc.read()
+            self.assertEqual(test_contents, text)
 
     def complete_preprocessing(self):
         config = {
@@ -86,6 +96,8 @@ class PreprocessingTestCase(TestCase):
             with open("Tests/Preprocessing/CompletePreprocessing/" + name_file) as doc:
                 contents = doc.read()
                 texts = spacy.clean(contents, config)
-                self.assertEqual(contents, texts)
+            with open("Tests/Preprocessing/DigitPreprocessing/result" + name_file, "r") as doc:
+                test_contents = doc.read()
+            self.assertEqual(test_contents, texts)
 
 

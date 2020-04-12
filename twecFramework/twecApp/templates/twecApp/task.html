@@ -1,0 +1,34 @@
+<!DOCTYPE html>                                                                                                                                                                            
+<html5 lang = en>
+    <head>
+        <title> Twec App </title>
+        <meta charset="utf8">
+        <meta name = "author" context = "Marco Natali">
+    </head>
+    <body>
+        <form action="{% url 'index' %}" method = "post">
+        List of Task:
+
+            {% for task in task_objects %}
+                <div>
+                    {{ task.num_task }}
+                    <div>
+                        {% if task.status %}
+                            Completed
+                        {% else %}
+                            In progress
+                        {% endif %}
+                    </div>
+                    <div>
+                    Document used:
+                    {% for document in task.document_set.all %}
+                        {{ document.document }}
+                    {% endfor %}
+                    </div>
+                    <button type = "submit" formaction = "delete/{{ task.num_task }}"> Delete </button>
+                </div>
+            {% endfor %}
+        <input type="submit">Add Task           
+    </body>
+</html5>
+ 

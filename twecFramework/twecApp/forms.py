@@ -31,4 +31,4 @@ class TaskModelForm(forms.ModelForm):
 
 #represent a formset of Document object
 DocumentModelFormSet = modelformset_factory(Document, fields=("document", ), extra=2)
-TaskModelFormSet = modelformset_factory(Task, fields=("num_task", "model"))
+TaskModelFormSet = modelformset_factory(Task, fields=("num_task", "status"))

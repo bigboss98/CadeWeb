@@ -18,6 +18,16 @@ class Configuration(models.Model):
     stemming = models.BooleanField(default=False)
     digit_masking = models.BooleanField(default=False)
 
+class Task(models.Model):
+    """
+        Task class used to represent a single task trained by TWEC, which contains one or more model trained 
+        :param num_task: used to represent number of task
+        :param config: configuration used in the model
+    """
+    num_task = models.AutoField(primary_key=True, unique=True)
+    config = models.OneToOneField(Configuration, on_delete=models.CASCADE, db_column='config')
+    status = models.BooleanField(default=False)
+
 class Model(models.Model):
     """
         Model class to represent a model trained with TWEC
@@ -26,7 +36,7 @@ class Model(models.Model):
         num_task: indicate number of Task, used to recognize a model in database
         config: configuration used in the model
     """
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, to_fields='num_task')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, to_field='num_task', default=0)
     model = models.FileField()
 
 class Document(models.Model):
@@ -45,11 +55,3 @@ class Document(models.Model):
             return "Name document: %", self.document
         return "Empty document"
 
-class Task(models.Model):
-    """
-        Task class used to represent a single task trained by TWEC, which contains one or more model trained 
-        :param num_task: used to represent number of task
-        :param config: configuration used in the model
-    """
-    num_task = models.AutoField(primary_key=True, unique=True)
-    config = models.OneToOneField(Configuration, on_delete=models.CASCADE, db_column='config')
