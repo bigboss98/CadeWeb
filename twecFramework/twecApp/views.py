@@ -49,7 +49,7 @@ class TrainView(View):
                 Model(task=Task.objects.last()).save()
             task.save()
         train(task.num_task)
-        return render(request, 'task.html', {'formset': docu_form, 'task_form': task})
+        return HttpResponseRedirect('task', {})
 
 class TaskView(View):
     """
@@ -71,11 +71,11 @@ class TaskDelete(View):
 
     model_class = TaskModelFormSet
 
-    def post(self, request):
+    def post(self, request, num_task):
         task_form = self.model_class(request.POST)
-        task = Task.objects.get(num_task = request.POST['id'])
+        task = Task.objects.get(num_task = num_task)
         task.delete()
-        return HttpResponseRedirect('../', {})
+        return HttpResponseRedirect('../task', {})
 
 
 class TaskAdd(View):
@@ -86,8 +86,8 @@ class TaskAdd(View):
     model_class = TaskModelFormSet
 
     def post(self, request):
-        task_form = self.model_class(request.POST)
-        return HttpResponseRedirect('../', {})
+        return HttpResponseRedirect('../../', {})
+
 
 def add_document(request):
     if request.method == 'POST':

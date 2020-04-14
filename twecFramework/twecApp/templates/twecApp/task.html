@@ -6,7 +6,8 @@
         <meta name = "author" context = "Marco Natali">
     </head>
     <body>
-        <form action="{% url 'index' %}" method = "post">
+        <form action="{% url 'task_add' %}" method = "post">
+        {% csrf_token %}
         List of Task:
 
             {% for task in task_objects %}
@@ -25,10 +26,10 @@
                         {{ document.document }}
                     {% endfor %}
                     </div>
-                    <button type = "submit" formaction = "delete/{{ task.num_task }}"> Delete </button>
+                    <button type = "submit" formaction = "{{ task.num_task }}"> Delete </button>
                 </div>
             {% endfor %}
-        <input type="submit">Add Task           
+        <input type="submit" value = "Add Task">      
     </body>
 </html5>
  
