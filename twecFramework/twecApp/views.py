@@ -4,9 +4,11 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponseRedirect, HttpResponse
+import os
 from .models import Document, Configuration, Model, Task
-from .forms import ConfigModelForm, DocumentModelFormSet, TaskModelFormSet
+from .forms import ConfigModelForm, DocumentModelFormSet, TaskModelFormSet, TaskModelForm
 from .train import train
+from twecFramework.settings import MEDIA_ROOT
 
 
 class TrainView(View):
@@ -17,6 +19,7 @@ class TrainView(View):
     """
     config_class = ConfigModelForm
     document_class = DocumentModelFormSet
+    task_class = TaskModelForm
 
     def get(self, request):
         """
@@ -25,11 +28,14 @@ class TrainView(View):
             :param self:current object of TrainView
             :param request: request file
         """
-        docu_form = self.document_class(queryset = Document.objects.filter(task=Task.objects.last()))
+        docu_form = self.document_class(queryset = Document.objects.filter(task=0))
         config_form = self.config_class()
+        task_form = self.task_class()
+
         return render(request, 'index.html', {
             'config_form': config_form,
             'docu_form': docu_form,
+            'task_form': task_form,
             })
 
     def post(self, request):
@@ -40,15 +46,20 @@ class TrainView(View):
         """
         config_form = self.config_class(request.POST, request.FILES)
         docu_form = self.document_class(request.POST, request.FILES)
-        config_form.save()
-        task = Task(config = Configuration.objects.last())
-        task.save()
-        if docu_form.is_valid():
+
+        num_files = 0
+        for doc in request.FILES:
+            num_files = num_files + 1
+
+        if docu_form.is_valid() and num_files >= 2:
+            config_form.save()
+            task = Task(config = Configuration.objects.last(), name_task = request.POST['name_task'])
+            task.save()
             for doc in request.FILES:
                 task.document_set.create(document=request.FILES[doc])
-                Model(task=Task.objects.last()).save()
+            
             task.save()
-        train(task.num_task)
+            train(task.num_task)
         return HttpResponseRedirect('task', {})
 
 class TaskView(View):
@@ -65,7 +76,23 @@ class TaskView(View):
             :param request: request file
         """
         task_objects = Task.objects.all()
-        return render(request, 'task.html', {'task_objects': task_objects})
+        config = [calculateConfig(task) for task in task_objects]
+        return render(request, 'task.html', {
+            'task_objects': task_objects,
+            'config': config,
+            })
+
+def calculateConfig(task):
+    temp = []
+    if task.config.lowercasing:
+        temp.append('lowercasing')
+    if task.config.stemming:
+        temp.append('stemming')
+    if task.config.digit_masking:
+        temp.append('digit_masking')
+    if task.config.lemmatization:
+        temp.append('lemmatization')
+    return temp
 
 class TaskDelete(View):
 
@@ -89,23 +116,3 @@ class TaskAdd(View):
         return HttpResponseRedirect('../../', {})
 
 
-def add_document(request):
-    if request.method == 'POST':
-        task = Task.objects.last()
-        task.document_set.create()
-        docu_form = DocumentModelFormSet(queryset=Document.objects.filter(task=task))
-        config_form = ConfigModelForm()
-    return HttpResponseRedirect('../', {'docu_form': docu_form, 'config_form': config_form})
-
-
-def remove_document(request):
-    """
-        Remove a Document from model database and model formset
-        :param request file
-        :return HttpResponse and redirect to ''
-    """
-    if request.method == 'POST':
-        if Document.objects.count() > 0: 
-            Document.objects.last().delete()
-    formset = DocumentModelFormSet()
-    return HttpResponseRedirect('../', {'formset': formset})

@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html5 lang = en>
     <head>
+        {% load static %}
+        {% load bootstrap4 %}
         <title> Twec App </title>
         <meta charset="utf8">
-        <meta name = "author" context = "Marco Natali">
-        <script type="text/javascript" src = "js/add_task.js"> </script>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery="full" %}
+        <script src = "{% static 'js/add_task.js' %}" type="application/javascript"> </script>
+        <script src = "{% static 'js/jquery.validate.js' %}" type="application/javascript"></script>
+
     </head>
     <body>
-        <form enctype = "multipart/form-data" action = "{% url 'index' %}" method = "post">
+
+        {% bootstrap_messages %}
+
+        <form enctype = "multipart/form-data" action = "{% url 'index' %}" method = "post" id = "form">
             {% csrf_token %}
-            {{ config_form }}
+
+            <div class = "container">
+                {% for elem in  config_form %}
+                <div class = "row">
+                    {{ elem.label_tag }}
+                    {{ elem }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class = "container">
+                {{ task_form }}
+            </div>
+            <div class = "container" id = "docs">
+                {{ docu_form.management_form }}
+                {% for elem in docu_form %}
+                        <div class = "document" id = "document-{{ forloop.counter }}">
+                        <label for="id_form-{{ forloop.counter }}-document">Document {{forloop.counter }}:</label>
+                        <input type="file" name="form-{{ forloop.counter }}-document" id="id_form-{{ forloop.counter }}-document" required>
+                    </div>
+                {% endfor %}
+            </div>
             <br>
-            {{ docu_form }}
-            <br>
-            <input type = "submit">
-            <button type = "submit" formaction = "{% url 'add_document' %}"> Add new Document </button>
-            <button type = "submit" formaction = "{% url 'remove_document' %}"> Delete Document </button>
-            <input type = "reset">
+            <div class = "container">
+                <input type = "submit" id="train" value = "Train Task" >
+                <input type = "submit"  id="add_document" value = "Add new Document">
+                <input type = "submit" id="remove_document" value = "Delete Document"> 
+                <input type = "reset">
+            </div>
         </form>
     </body>
 </html5>

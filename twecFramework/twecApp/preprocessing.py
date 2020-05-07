@@ -30,18 +30,20 @@ class SimpleSpacyCleaner:
 
         doc = self.spacy(text)
 
-        tokens = [token for token in doc if
+        tokens = [token.text for token in doc if
                   not token.is_stop
                   and not token.is_punct]
+
 
         if config['lemmatization']:
             tokens = lemmatization(tokens)
 
+        if config['digit_masking']:
+            tokens = digit_masking(tokens)
+        
         if config['stemming']:
             tokens = stemming(tokens)
 
-        if config['digit_masking']:
-            tokens = digit_masking(tokens)
 
         text = " ".join([str(token) for token in tokens])
         if config['lowercasing']:

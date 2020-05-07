@@ -3,32 +3,68 @@
     <head>
         <title> Twec App </title>
         <meta charset="utf8">
-        <meta name = "author" context = "Marco Natali">
+        {% load bootstrap4 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
     </head>
     <body>
         <form action="{% url 'task_add' %}" method = "post">
         {% csrf_token %}
         List of Task:
-
-            {% for task in task_objects %}
-                <div>
-                    {{ task.num_task }}
-                    <div>
+            <div class = "container">
+                <div class = "row">
+                    <div class = "col-sm-3">
+                        Name task
+                    </div>
+                    <div class = "col-sm-3">
+                        Status
+                    </div>
+                    <div class = "col-sm-3">
+                        Document used
+                    </div>
+                    <div class = "col-sm-3">
+                        Preprocessing config
+                    </div>
+            </div>
+            <div class = "container">
+                {% for values in config %}
+                {% for task in task_objects %}
+                    <div class = "row">
+                        <div class = "col-sm-3">
+                            {{ task.name_task }}
+                        </div>
+                        <div class = "col-sm-3">
                         {% if task.status %}
                             Completed
                         {% else %}
                             In progress
                         {% endif %}
+                        </div>
+
+                        <div class="col-sm-3">
+                            Document used:
+                            {% for document in task.document_set.all %}
+                                {{ document.document }}
+                            {% endfor %}
+                        </div>
+
+                        <div class = "col-sm-3">
+                                {% for value in values %}
+                                    {{ value }}
+                                {% endfor %}
+                        </div>
                     </div>
-                    <div>
-                    Document used:
-                    {% for document in task.document_set.all %}
-                        {{ document.document }}
-                    {% endfor %}
+                    <div class = "row">
+                        <div class = "col-sm-3">
+                            <input type = "submit" formaction = "{{ task.num_task }}" value="Delete">
+                        </div>
+                        <div class = "col-sm-3">
+                            <input type = "submit" formaction = "local/{{ task.num_task }}" value="Local Analysis">
+                        </div>
                     </div>
-                    <button type = "submit" formaction = "{{ task.num_task }}"> Delete </button>
-                </div>
             {% endfor %}
+            {% endfor %}
+            </div>
         <input type="submit" value = "Add Task">      
     </body>
 </html5>

@@ -3,6 +3,7 @@
 """
 from aligned_word_embeddings.aligned_word_embeddings import  AlignedWordEmbeddings
 from aligned_word_embeddings.spatial.distances import most_similar_from_model
+from cade.cade import CADE
 from gensim.models.word2vec import Word2Vec
 from background_task import background
 from .models import Model, Document, Task
@@ -26,15 +27,16 @@ def train(user_id):
         with open(document.document.path, "r") as doc:
             contents = doc.read()
         with open("compass.txt", "w") as doc:
-            doc.write(contents)
             doc.write(preproc.clean(contents, config))
-    aligner = AlignedWordEmbeddings(size=30, siter=10, diter=10, workers=4)
+    aligner = CADE(size=30, siter=10, diter=10, workers=4)
 
     merge_document(task)
     aligner.train_compass("compass.txt", overwrite=False)
 
     for document in task.document_set.all():
         slice_document = aligner.train_slice(document.document.path, save=True)
+        path = "model/" + document.document.name[:-4] + ".model"
+        task.model_set.create(model=path)
 
     task.status = True
     task.save()

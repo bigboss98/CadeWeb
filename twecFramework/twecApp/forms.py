@@ -27,8 +27,8 @@ class TaskModelForm(forms.ModelForm):
     """
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = 'name_task', 
 
 #represent a formset of Document object
 DocumentModelFormSet = modelformset_factory(Document, fields=("document", ), extra=2)
-TaskModelFormSet = modelformset_factory(Task, fields=("num_task", "status"))
+TaskModelFormSet = modelformset_factory(Task, fields=("name_task", "status"))

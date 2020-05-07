@@ -7,8 +7,6 @@ class PreprocessingTestCase(TestCase):
     """
         PreprocessingTestCase is a preprocessing test case done using django testcase
     """
-    def setUp(self):
-        spacy = SimpleSpacyCleaner("en_core_web_sm")
 
     def test_no_preprocessing(self):
         config = {
@@ -17,10 +15,11 @@ class PreprocessingTestCase(TestCase):
                 'digit_masking': False,
                 'lemmatization': False
                 }
+        spacy = SimpleSpacyCleaner("en_core_web_sm")
         for name_file in ['file1.txt', 'file2.txt']:
             with open("Tests/Preprocessing/NoPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
-                text = self.spacy.clean(contents, config)
+                text = spacy.clean(contents, config)
             with open("Tests/Preprocessing/NoPreprocessing/result" + name_file, "r") as doc:
                 test_contents = doc.read()
             self.assertEqual(test_contents, text)
@@ -32,13 +31,15 @@ class PreprocessingTestCase(TestCase):
                 'lemmatization': False,
                 'digit_masking': False
                 }
+        spacy = SimpleSpacyCleaner("en_core_web_sm")
         for name_file in ['file1.txt', 'file2.txt']:
             with open("Tests/Preprocessing/LowerPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
-                text = self.spacy.clean(contents, config)
+                text = spacy.clean(contents, config)
             with open("Tests/Preprocessing/LowerPreprocessing/result" + name_file, "r") as doc:
                 test_contents = doc.read()
             self.assertEqual(test_contents, text)
+            
 
     def test_preprocessing_stemming(self):
         config = {
@@ -47,6 +48,7 @@ class PreprocessingTestCase(TestCase):
                 'lemmatization': False,
                 'digit_masking': False
                 }
+        spacy = SimpleSpacyCleaner("en_core_web_sm")
         for name_file in ['file1.txt', 'file2.txt']:
             with open("Tests/Preprocessing/StemmingPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
@@ -62,6 +64,7 @@ class PreprocessingTestCase(TestCase):
                 'lemmatization': True,
                 'digit_masking': False
                 }
+        spacy = SimpleSpacyCleaner("en_core_web_sm")
         for name_file in ['file1.txt', 'file2.txt']:
             with open("Tests/Preprocessing/LemmaPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
@@ -77,6 +80,7 @@ class PreprocessingTestCase(TestCase):
                 'lemmatization': False,
                 'digit_masking': True
                 }
+        spacy = SimpleSpacyCleaner("en_core_web_sm")
         for name_file in ['file1.txt', 'file2.txt']:
             with open("Tests/Preprocessing/DigitPreprocessing/" + name_file, "r") as doc:
                 contents = doc.read()
@@ -92,12 +96,13 @@ class PreprocessingTestCase(TestCase):
                 'lemmatization': True,
                 'digit_masking': True
                 }
+        spacy = SimpleSpacyCleaner("en_core_web_sm")
         for name_file in ['file1.txt', 'file2.txt']:
             with open("Tests/Preprocessing/CompletePreprocessing/" + name_file) as doc:
                 contents = doc.read()
                 texts = spacy.clean(contents, config)
             with open("Tests/Preprocessing/DigitPreprocessing/result" + name_file, "r") as doc:
                 test_contents = doc.read()
-            self.assertEqual(test_contents, texts)
+            self.assertEqual(test_contents, text)
 
 

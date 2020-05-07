@@ -25,6 +25,7 @@ class Task(models.Model):
         :param config: configuration used in the model
     """
     num_task = models.AutoField(primary_key=True, unique=True)
+    name_task = models.CharField(default = "New Task", max_length = 200)
     config = models.OneToOneField(Configuration, on_delete=models.CASCADE, db_column='config')
     status = models.BooleanField(default=False)
 
@@ -37,7 +38,7 @@ class Model(models.Model):
         config: configuration used in the model
     """
     task = models.ForeignKey(Task, on_delete=models.CASCADE, to_field='num_task', default=0)
-    model = models.FileField()
+    model = models.FilePathField()
 
 class Document(models.Model):
     """
