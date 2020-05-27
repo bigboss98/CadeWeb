@@ -1,37 +1,155 @@
-<!DOCTYPE html>
+<!DOCTYPE html>                                                                                                                                                                            
 <html5 lang = en>
     <head>
-        {% load static %}
-        {% load bootstrap4 %}
-        <title> Twec Local Analysis </title>
+        <meta charset = "utf8">
+        <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+        <title> Twec App Task</title>
         <meta charset="utf8">
+        {% load bootstrap4 %}
+        {% load static %}
         {% bootstrap_css %}
-        {% bootstrap_javascript jquery="full" %}
-        <script src = "{% static 'js/jquery.validate.js' %}" type="application/javascript"></script>
-
+        {% bootstrap_javascript jquery='full' %}
+        <link href = "{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel = "stylesheet" type = "text/css">
+        <link href = "{% static 'css/sb-admin-2.min.css' %}" rel = "stylesheet">
+        <script src = "{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+        <script src = "{% static 'js/sb-admin-2.min.js' %}"></script>
+        <script src = "{% static 'vendor/chart.js/Chart.min.js' %}"></script>
     </head>
-    <body>
+    <body id="page-top">
 
-        {% bootstrap_messages %}
-        <div class = "container">
-            Top 20 Jumpers of two models
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
-            {% for elem in top_jumpers %}
-                <div class = "row">
-                    {{ elem }}
+            <!-- Sidebar -->
+            <ul class = "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id = "accordionSidebar">
+
+                <!-- Sidebar - Brand -->
+                <a class = "sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class = "fas fa-laugh-wink"></i>
+                    </div>
+                    <div class = "sidebar-brand-text mx-3"> TwecApp </div>
+                </a>
+
+                <!-- Divider -->
+                <hr class = "sidebar-divider my-0">
+                    
+                <!-- Nav Item  Dashboard -->
+                <li class = "nav-item active">
+                    <a class = "nav-link" href = "#">
+                        <i class = "fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class = "sidebar-divider">
+                
+                <!-- Heading -->
+                <div class = "sidebar-heading">
+                    Analysis
                 </div>
-            {% endfor %}
-        </div>
 
-        <div class = "container">
-            Top 20 Stables of two models
+                <!-- Nav item - Local Analysis Collapse menu -->
+                <li class="nav-item">
+                    <a class = "nav-link collapsed" href = "#" data-toggle="collapse" data-target = "#collapseTwo" aria-expanded = "true" aria-controls = "collapseTwo">
+                        <i class = "fas fa-fw fa-cog"></i>
+                        <span>Global Analysis </span></a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class = "bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href = "#">Top Jumpers</a>
+                            <a class="collapse-item" href = "#">Top stables</a>
+                        </div>
+                    </div>
+                </li>
 
-            {% for elem in top_stables %}
-                <div class = "row">
-                    {{ elem }}
+                <!-- Nav item - Global Analysis collapse menu -->
+                <li class = "nav-item">
+                    <a class = "nav-link collapsed" href = "#" data-toggle="collapse" data-target = "#collapseUtilities" aria-expanded = "true" aria-controls = "collapseUtilities">
+                        <i class = "fas fa-fw fa-wrench"></i>
+                        <span>Local Analysis </span></a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class = "bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header"> aaa </h6>
+                            <a class="collapse-item" href = "#">bbbb</a>
+                            <a class="collapse-item" href = "{% url 'index' %}">cccc</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id = "sidebarToggle"></button>
                 </div>
-            {% endfor %}
+        </ul> 
+
+            <!-- Content wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main content -->
+                <div id = "content">
+                        
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        
+                        <!-- Sidebar Toggle (Sidebar) -->
+                        <button id = "sidebarToggleTop" class = "btn btn-link d-md-none rounded-circle mr-3">
+                            <i class = "fa fa-bars"></i>
+                        </button>
+                    </nav>
+
+                <!-- Page Content -->
+                <div class = "container-fluid">
+
+                    <!-- Page heading -->
+                    <h1 class = "h3 mb-0 text-gray-800">Task view </h1>
+
+                    <!-- Content Row -->
+                    <div class = "row">
+                            <div class = "card shadow mb-4">
+                                <!-- Top Jumpers Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-primary">Top Jumpers</h6>
+                            </a>
+                                <!-- Top Jumpers Content -Collapse  -->
+                                <div class="collapse show" id="collapseCardExample">
+                                    <div class="card-body">
+                                        <div class = "row">
+                                            Top 20 Jumpers of two models
+
+                                            <div class = "row">
+                                                {% for elem in top_jumpers %}
+                                                    {{ elem }}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                           <div class = "card shadow mb-4">
+                                <!-- Top Stables Header - Accordion -->
+                                <a href = "#topStables" class = "d-block card-header py-3" data-toggle="collapse" role = "button" aria-expanded="true" aria-controls="topStables">
+                                   <h6 class = "m-0 font-weight-bold text-primary">Top Stables</h6>
+                                </a>
+                                <!-- Top Stables Content - Collapse -->
+                                <div class = "collapse show" id = "topStables">
+                                    <div class = "card-body">
+                                        <div class = "row">
+                                            Top 20 Stables of two models
+                                        </div>
+                                        <div class = "row">
+                                            {% for elem in top_stables %}
+                                                {{ elem }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
         </div>
     </body>
 </html5>
-
+                 
