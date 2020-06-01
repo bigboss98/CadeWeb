@@ -39,7 +39,7 @@
                     
                 <!-- Nav Item  Dashboard -->
                 <li class = "nav-item active">
-                    <a class = "nav-link" href = "/twecApp/task/{{task.num_task}}/analysis">
+                    <a class = "nav-link" href = "#">
                         <i class = "fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -59,7 +59,7 @@
                         <span>Global Analysis </span></a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class = "bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href = "#">Top Jumpers</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{ task.num_task }}/global/jumpers">Top Jumpers</a>
                             <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/global/stables">Top stables</a>
                         </div>
                     </div>
@@ -72,9 +72,9 @@
                         <span>Local Analysis </span></a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class = "bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header"> aaa </h6>
-                            <a class="collapse-item" href = "#">bbbb</a>
-                            <a class="collapse-item" href = "#">cccc</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/local/correspondance">Correspondance</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/local/neighbors">Neighbors</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/local/similarity">Similarity</a>
                         </div>
                     </div>
                 </li>
@@ -104,35 +104,26 @@
                 <div class = "container-fluid">
 
                     <!-- Page heading -->
-                    <h1 class = "h3 mb-0 text-gray-800">Task view </h1>
+                    <h1 class = "h3 mb-0 text-gray-800">Task information </h1>
+
+                        <div class = "card-body py-3">
+                            <div class = "row">
+                                <h6 class = "text-primary">Name: </h6>
+                                {{ task.name_task }}
+                            </div>
+                        
+                            <div class = "card-body py-3">
+                                <h6 class = "text-primary"> Document used: </h6>
+                                {% for document in task.document_set.all %}
+                                    {{ document.document }}
+                                {% endfor %}
+                            </div>
                     
-                    <!-- Page heading -->
-                    <div class = "card shadow mb-4">
-                        <div class = "card-header py-3">
-                            <h6 class = "m-0 font-weight-bold text-primary">Top 20 Jumpers </h6>
-                        </div>
-                        <!-- Content Row -->
-                        <div class = "card-body">
-                            <div class = "table-responsive">
-                                <table class = "table table-bordered" id = "dataTable" width = "100%" cellspacing = "0">
-                                    <thead>
-                                        <tr>
-                                            <th> Word </th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th> Word </th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    {% for elem in top_jumpers %}
-                                        <tr>
-                                            <th> {{ elem }}</th>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                            <div class = "card-body py-3">
+                                <h6 class = "text-primary"> Preprocessing config: </h6>
+                                {% for option in config %}
+                                    {{ option }}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

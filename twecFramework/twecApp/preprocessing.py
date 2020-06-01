@@ -3,6 +3,7 @@
 """
 from multiprocessing import Pool
 import re
+import math
 import spacy
 from nltk.stem.porter import PorterStemmer
 
@@ -16,7 +17,7 @@ class SimpleSpacyCleaner:
         :param spacy_model: e.g., en_core_web_sm
         """
         self.spacy = spacy.load(spacy_model, disable=["tagger", "parser", "ner"])
-        self.spacy.max_length = 10000000
+        self.spacy.max_length = math.inf
 
     def clean(self, text, config):
         """
@@ -26,24 +27,21 @@ class SimpleSpacyCleaner:
         """
 
 
+        if config['digit_masking']:
+            text = digit_masking(text)
+
         text = " ".join(text.split())
 
         doc = self.spacy(text)
 
-        tokens = [token.text for token in doc if
+        tokens = [token for token in doc if
                   not token.is_stop
                   and not token.is_punct]
-
-
         if config['lemmatization']:
             tokens = lemmatization(tokens)
 
-        if config['digit_masking']:
-            tokens = digit_masking(tokens)
-        
         if config['stemming']:
             tokens = stemming(tokens)
-
 
         text = " ".join([str(token) for token in tokens])
         if config['lowercasing']:
@@ -81,14 +79,15 @@ def stemming(tokens):
         :return:
     """
     stemmer = PorterStemmer()
-    return [stemmer.stem(token) for token in tokens]
+    return [stemmer.stem(str(token)) for token in tokens]
 
-def digit_masking(tokens):
+def digit_masking(text):
     """
         Digit masking that transform all digit in token "NUM"
-        :param tokens:
+        :param text:
     """
-
-    return ['NUM' if re.match(r'^-?[0-9]+(\.[0-9]+)?$', token)
-            else token
-            for token in tokens]
+    text_split = text.split()
+    tokens = ['NUM' if re.match(r'^-?[0-9]+(\.[0-9]+)?$', token)
+              else token
+              for token in text_split]
+    return " ".join(tokens)

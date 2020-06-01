@@ -3,15 +3,13 @@
 """
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponseRedirect, HttpResponse
-import os
-from .models import Document, Configuration, Model, Task
+from django.http import HttpResponseRedirect
+from .models import Document, Configuration, Task
 from .forms import ConfigModelForm, DocumentModelFormSet, TaskModelFormSet, TaskModelForm
 from .train import train
-from twecFramework.settings import MEDIA_ROOT
 
 
-class TrainView(View):
+class TaskAdd(View):
     """
         TrainView class, used for select document file, configuration option and train a new model
         :attrib model_class: ModelModelForm  used to represent a Model form
@@ -28,7 +26,7 @@ class TrainView(View):
             :param self:current object of TrainView
             :param request: request file
         """
-        docu_form = self.document_class(queryset = Document.objects.filter(task=0))
+        docu_form = self.document_class(queryset=Document.objects.filter(task=0))
         config_form = self.config_class()
         task_form = self.task_class()
 
@@ -51,23 +49,21 @@ class TrainView(View):
         for doc in request.FILES:
             num_files = num_files + 1
 
+        print("Status: ", docu_form.is_valid())
         if docu_form.is_valid() and num_files >= 2:
             config_form.save()
-            task = Task(config = Configuration.objects.last(), name_task = request.POST['name_task'])
+            task = Task(config=Configuration.objects.last(), name_task=request.POST['name_task'])
             task.save()
             for doc in request.FILES:
                 task.document_set.create(document=request.FILES[doc])
-            
             task.save()
             train(task.num_task)
-        return HttpResponseRedirect('task', {})
+        return HttpResponseRedirect('', {})
 
 class TaskView(View):
     """
         TaskView is a View class used for views task trained
-        :param model_class: indicate name of Form class used
     """
-    model_class = TaskModelFormSet
 
     def get(self, request):
         """
@@ -76,13 +72,34 @@ class TaskView(View):
             :param request: request file
         """
         task_objects = Task.objects.all()
-        config = [calculateConfig(task) for task in task_objects]
+        config = [calculate_config(task) for task in task_objects]
         return render(request, 'task.html', {
             'task_objects': task_objects,
             'config': config,
             })
 
-def calculateConfig(task):
+class DetailsView(View):
+    """
+        AnalysisView is a View class used for views details of a task,
+        used on understand purpose of task, configuration used
+    """
+
+    def get(self, request, num_task):
+        """
+            Get function used for retrieve details of a task
+        """
+        task_object = Task.objects.get(pk=num_task)
+        config = calculate_config(task_object)
+        return render(request, 'analysis.html', {
+            'task': task_object,
+            'config': config,
+            })
+
+def calculate_config(task):
+    """
+        Calculate config options used by a Task
+        :param task: current object of TaskView
+    """
     temp = []
     if task.config.lowercasing:
         temp.append('lowercasing')
@@ -95,24 +112,17 @@ def calculateConfig(task):
     return temp
 
 class TaskDelete(View):
-
-    model_class = TaskModelFormSet
-
-    def post(self, request, num_task):
-        task_form = self.model_class(request.POST)
-        task = Task.objects.get(num_task = num_task)
-        task.delete()
-        return HttpResponseRedirect('../task', {})
-
-
-class TaskAdd(View):
     """
-        TaskAdd is a View class used for create a new task
+        TaskDelete is a View class used for delete a task
         :param model_class: indicate name of Form class used
     """
     model_class = TaskModelFormSet
 
-    def post(self, request):
-        return HttpResponseRedirect('../../', {})
-
-
+    def get(self, request, num_task):
+        """
+            Get function that delete a Task
+            :param num_task: indicate the id of task to delete
+        """
+        task = Task.objects.get(num_task=num_task)
+        task.delete()
+        return HttpResponseRedirect('../task', {})

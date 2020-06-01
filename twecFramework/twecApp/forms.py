@@ -27,7 +27,14 @@ class TaskModelForm(forms.ModelForm):
     """
     class Meta:
         model = Task
-        fields = 'name_task', 
+        fields = 'name_task',
+
+class WordForm(forms.Form):
+    word = forms.CharField(max_length=200)
+
+class WordNeighForm(forms.Form):
+    word = forms.CharField(max_length=200)
+    topn = forms.IntegerField()
 
 #represent a formset of Document object
 DocumentModelFormSet = modelformset_factory(Document, fields=("document", ), extra=2)
