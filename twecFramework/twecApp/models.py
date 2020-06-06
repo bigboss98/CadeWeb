@@ -43,6 +43,7 @@ class Model(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, to_field='num_task', default=0)
     name = models.CharField(default="New Model", max_length=200)
     model = models.FilePathField()
+    document = models.FileField(blank=True)
 
 class Document(models.Model):
     """

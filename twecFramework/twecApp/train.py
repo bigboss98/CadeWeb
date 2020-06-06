@@ -26,25 +26,22 @@ def train(task_id):
         :param task_id: ID of Task to train
     """
     preproc = SimpleSpacyCleaner("en_core_web_sm")
-    task = Task.objects.last()
+    task = Task.objects.get(pk=task_id)
     config = create_config_options(task)
-    for document in task.document_set.all():
-        print("A")
-        with open(document.document.path, "r") as doc:
+    for model in task.model_set.all():
+        with open(model.document.path, "r") as doc:
             contents = doc.read()
         with open("compass.txt", "w") as doc:
             doc.write(preproc.clean(contents, config))
-    print("D")
     aligner = CADE(size=30, siter=10, diter=10, workers=4)
 
     merge_document(task)
     aligner.train_compass("compass.txt", overwrite=False)
-
-    for document in task.document_set.all():
-        aligner.train_slice(document.document.path, save=True)
-        path = "model/" + document.document.name + ".model"
-        task.model_set.create(model=path)
-
+    for model in task.model_set.all():
+        aligner.train_slice(model.document.path, save=True)
+        path = "model/" + model.document.name[:-4] + ".model"
+        model.model = path
+        model.save()
     task.status = True
     task.save()
 
@@ -54,7 +51,7 @@ def merge_document(task):
         :param task: current Task object
     """
     contents = ""
-    for document in task.document_set.all():
+    for document in task.model_set.all():
         with open(document.document.path, "r") as document_file:
             contents += document_file.read()
     file_merge = open("compass.txt", "w")

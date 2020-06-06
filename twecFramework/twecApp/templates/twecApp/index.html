@@ -109,7 +109,9 @@
                         <div class = "container" id = "docs">
                             {{ docu_form.management_form }}
                             {% for elem in docu_form %}
-                                    <div class = "document" id = "document-{{ forloop.counter }}">
+                                <div class = "document" id = "document-{{ forloop.counter }}">
+                                    {{ elem.name.label_tag }}
+                                    {{ elem.name }}
                                     <label for="id_form-{{ forloop.counter }}-document">Document {{forloop.counter }}:</label>
                                     <input type="file" name="form-{{ forloop.counter }}-document" id="id_form-{{ forloop.counter }}-document" required>
                                 </div>

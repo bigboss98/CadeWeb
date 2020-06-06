@@ -3,7 +3,7 @@
     <head>
         <meta charset = "utf8">
         <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
-        <title> Twec App Task</title>
+        <title> CADEWeb Correspondence</title>
         <meta charset="utf8">
         {% load bootstrap4 %}
         {% load static %}
@@ -60,8 +60,8 @@
                         <span>Global Analysis </span></a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class = "bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/global/jumpers">Top Jumpers</a>
-                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/global/stables">Top stables</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/global/jumpers">Top Jumpers</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/global/stables">Top stables</a>
                         </div>
                     </div>
                 </li>
@@ -74,8 +74,9 @@
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class = "bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href = "#">Correspondance</a>
-                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/local/neighbors">Neighbors</a>
-                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/local/similarity">Similarity</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/local/neighbors">Neighbors</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/local/similarity">Similarity</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/local/analogies">Analogies</a>
                         </div>
                     </div>
                 </li>
@@ -105,15 +106,22 @@
                 <div class = "container-fluid">
 
                     <!-- Page heading -->
-                    <h1 class = "h3 mb-0 text-gray-800"> </h1>
+                    <h1 class = "h3 mb-0 text-gray-800"> Correspondance Analysis</h1>
                     
                     <!-- Content Row -->
                         <div class = "card-body">
                             <form action = "#" method = "post">
                             {% csrf_token %}
                                 <div class = "container">
-                                    {{ word_form.word.label_tag }}
-                                    {{ word_form.word }}
+                                    {% for elem in word_form %}
+                                        {{ elem.label_tag }}
+                                        {{ elem }}
+                                    {% endfor %}
+                                    <select id = "modelChoice" name = "modelChoice">
+                                        {% for model1, model2 in comparable_models %}
+                                            <option value = "{{model1.name }}-{{model2.name}}">{{model1.name}}-{{model2.name}}</option>
+                                        {% endfor %}
+                                    </select>
                                     <input type = "submit" value = "Search">
                                 </div>
                             </form>
@@ -125,23 +133,19 @@
     
                             <div class = "table-responsive">
                                 <table class = "table table-bordered" id = "dataTable" width = "100%" cellspacing = "0">
-                                    <thead>
+                                    <thead class = "text-primary">
                                         <tr>
                                             <th> Word</th>
-                                            <th> Correspondance Value </th>
+                                            <th> Correspondance Word </th>
+                                            <th> Similarity Value </th>
                                         </tr>
                                     </thead>
-                                    <tfoot>                                                                                                                                                
-                                        <tr>
-                                            <th> Word </th>
-                                            <th> Correspondance Value </th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
-                                        {% for result, word in results %}
+                                        {% for result, word, value in results %}
                                         <tr>
                                             <th> {{ word }} </th>
                                             <th> {{ result }} </th>
+                                            <th> {{ value }} </th>
                                         </tr>
                                         {% endfor %}
                                     </tbody>

@@ -4,8 +4,8 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponseRedirect
-from .models import Document, Configuration, Task
-from .forms import ConfigModelForm, DocumentModelFormSet, TaskModelFormSet, TaskModelForm
+from .models import Model, Configuration, Task
+from .forms import ConfigModelForm, ModelModelFormSet, TaskModelFormSet, TaskModelForm
 from .train import train
 
 
@@ -16,7 +16,7 @@ class TaskAdd(View):
         :attrib docu_class: DocumentModelFormSet used to represent a Document form
     """
     config_class = ConfigModelForm
-    document_class = DocumentModelFormSet
+    document_class = ModelModelFormSet
     task_class = TaskModelForm
 
     def get(self, request):
@@ -26,7 +26,7 @@ class TaskAdd(View):
             :param self:current object of TrainView
             :param request: request file
         """
-        docu_form = self.document_class(queryset=Document.objects.filter(task=0))
+        docu_form = self.document_class(queryset=Model.objects.filter(task=0))
         config_form = self.config_class()
         task_form = self.task_class()
 
@@ -42,23 +42,26 @@ class TaskAdd(View):
             :param self:current object of TrainView
             :param request: request file
         """
-        config_form = self.config_class(request.POST, request.FILES)
+        config_form = self.config_class(request.POST)
         docu_form = self.document_class(request.POST, request.FILES)
 
         num_files = 0
         for doc in request.FILES:
             num_files = num_files + 1
 
-        print("Status: ", docu_form.is_valid())
         if docu_form.is_valid() and num_files >= 2:
             config_form.save()
             task = Task(config=Configuration.objects.last(), name_task=request.POST['name_task'])
             task.save()
+            num_documents = 0
             for doc in request.FILES:
-                task.document_set.create(document=request.FILES[doc])
+                task.model_set.create(document=request.FILES[doc],
+                                      name=request.POST['form-' + str(num_documents) + "-name"])
+                num_documents = num_documents + 1
             task.save()
+            print("Len: ", len(task.model_set.all()))
             train(task.num_task)
-        return HttpResponseRedirect('', {})
+        return HttpResponseRedirect('../', {})
 
 class TaskView(View):
     """
@@ -89,7 +92,8 @@ class DetailsView(View):
             Get function used for retrieve details of a task
         """
         task_object = Task.objects.get(pk=num_task)
-        config = calculate_config(task_object)
+        for doc in task_object.model_set.all():
+            config = calculate_config(task_object)
         return render(request, 'analysis.html', {
             'task': task_object,
             'config': config,

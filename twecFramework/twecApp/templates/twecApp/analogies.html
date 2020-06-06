@@ -3,7 +3,7 @@
     <head>
         <meta charset = "utf8">
         <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
-        <title> CADEWeb Neighbors</title>
+        <title> CadeWeb Analogies </title>
         <meta charset="utf8">
         {% load bootstrap4 %}
         {% load static %}
@@ -17,10 +17,6 @@
         <script src = "{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
         <script src = "{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>                                                                                            
         <script src = "{% static 'js/demo/datatables-demo.js' %}"></script>
-        <script src = "{% static 'vendor/chart.js/Chart.min.js' %}"></script>
-        <script src = "{% static 'js/demo/chart-area-demo.js' %}"></script>
-        <script src = "{% static 'js/demo/chart-pie-demo.js' %}"></script>
-        <script src = "{% static 'js/demo/chart-bar-demo.js' %}"></script>
     </head>
     <body id="page-top">
 
@@ -35,7 +31,7 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class = "fas fa-laugh-wink"></i>
                     </div>
-                    <div class = "sidebar-brand-text mx-3"> CADEWeb </div>
+                    <div class = "sidebar-brand-text mx-3"> CadeWeb </div>
                 </a>
 
                 <!-- Divider -->
@@ -77,9 +73,9 @@
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class = "bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/local/correspondance">Correspondance</a>
-                            <a class="collapse-item" href = "#">Neighbors</a>
+                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/local/neighbors">Neighbors</a>
                             <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/local/similarity">Similarity</a>
-                            <a class="collapse-item" href = "/twecApp/task/{{task.num_task}}/analysis/local/analogies">Analogies</a>
+                            <a class="collapse-item" href="#">Analogies </a>
                         </div>
                     </div>
                 </li>
@@ -109,43 +105,46 @@
                 <div class = "container-fluid">
 
                     <!-- Page heading -->
-                    <h1 class = "h3 mb-0 text-gray-800">Neighbors Analysis </h1>
-                    
+                    <h1 class = "h3 mb-0 text-gray-800">Analogies Analysis </h1>
+                   
+                    <div class = "container-fluid">
+                        <form action = "#" method = "post">
+                            {% csrf_token %}
+                            {% for elem in word_form %}
+                                {{ elem.label_tag }}
+                                {{ elem }}
+                            {% endfor %}
+                            <input type = "submit" value = "Search">
+                            <select id = "modelChoice" name = "modelChoice">
+                                {% for model1, model2 in comparable_models %}
+                                    <option value = "{{model1.name }}-{{model2.name}}">{{model1.name}}-{{model2.name}}</option>
+                                {% endfor %}
+                            </select>
+
+                        </form>
                     <!-- Content Row -->
                         <div class = "card-body">
-                            <form action = "#" method="post">
-                                {% csrf_token %}
-                                <div class = "container">
-                                    {% for elem in word_form %}
-                                        {{ elem.label_tag }}
-                                        {{ elem }}
-                                    {% endfor %}
-                                    <select id = "modelChoice" name = "modelChoice">
-                                        {% for model in task.model_set.all %}
-                                            <option value = "{{model.name}}">{{model.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <input type="submit" value = "Search">
-                                </div>
-                            </form>
                             <div class = "table-responsive">
                                 <table class = "table table-bordered" id = "dataTable" width = "100%" cellspacing = "0">
                                     <thead>
                                         <tr>
-                                            <th> Neighbor </th>
+                                            <th> Word </th>
+                                            <th> Analogies word </th>
                                         </tr>
                                     </thead>
                                     <tfoot>                                                                                                                                                
                                         <tr>
-                                            <th> Neighbor </th>
+                                            <th> Word </th>
+                                            <th> Corrispective word </th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    {% for elem in results%}
-                                        <tr>
-                                            <th> {{ elem }}</th>
-                                        </tr>
-                                    {% endfor %}
+                                        {% for word, res in results %}
+                                            <tr>
+                                                <th> {{ word }}</th>
+                                                <th> {{ res }}</th>
+                                            </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

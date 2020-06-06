@@ -25,8 +25,6 @@ class SimpleSpacyCleaner:
         :param text:
         :return:
         """
-
-
         if config['digit_masking']:
             text = digit_masking(text)
 
