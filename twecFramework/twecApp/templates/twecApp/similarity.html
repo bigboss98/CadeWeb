@@ -106,21 +106,27 @@
 
                     <!-- Page heading -->
                     <h1 class = "h3 mb-0 text-gray-800">Similarity Analysis </h1>
-                   
+                  
+                    <div class = "container-fluid">
+                        <h3 class = "h3 mb-0 text-gray-800">Number of Neighbors is used to calculate local Neighbors similarity
+                                                            and Models are models used in Similarity analysis
+                        </h3>
+                    </div>
+
                     <div class = "container-fluid">
                         <form action = "#" method = "post">
                             {% csrf_token %}
-                            {% for elem in word_form %}
-                                {{ elem.label_tag }}
-                                {{ elem }}
-                            {% endfor %}
-                            <input type = "submit" value = "Search">
+                            {{ word_form.word.label_tag }}
+                            {{ word_form.word }}
+                            <label for="id-topn">Number of Neighbors: </label>
+                            {{ word_form.topn }}
+                            <label for = "modelChoice">Models: </label>
                             <select id = "modelChoice" name = "modelChoice">
                                 {% for model1, model2 in comparable_models %}
                                     <option value = "{{model1.name }}-{{model2.name}}">{{model1.name}}-{{model2.name}}</option>
                                 {% endfor %}
                             </select>
-
+                            <input type = "submit" value = "Search">
                         </form>
                     <!-- Content Row -->
                         <div class = "card-body">

@@ -108,21 +108,23 @@
                     <h1 class = "h3 mb-0 text-gray-800">Jumpers Analysis </h1>
                     
                     <div class = "container-fluid">
-                        Top-k is the number of Jumpers that we want to calculate and show
+                        <h3 class = "h3 mb-0 text-gray-800">Top-k is the number of Jumpers that we want to calculate and show.</h3>
+                        <h3 class = "h3 mb-0 text-gray-800">Corpora documents are corpora documents used to conduct jumpers analysis.</h3>
                     </div>
 
                     <!-- Page heading -->
                     <div class = "container-fluid">
                         <form action = "#" method = "post">
                         {% csrf_token %}
-                            {{ word_form.topk.label_tag }}
-                            {{ word_form.topk }}
-                            <input type = "submit" value = "Search">
+                            <label for = "id-topn">Top-k: </label>
+                            {{ word_form.topn }}
+                            <label for="modelChoice">Corpora Documents: </label>
                             <select id = "modelChoice" name = "modelChoice">
                                 {% for model1, model2 in comparable_models %}
                                     <option value = "{{model1.name }}-{{model2.name}}">{{model1.name}}-{{model2.name}}</option>
                                 {% endfor %}
                             </select>
+                            <input type = "submit" value = "Search">
                         </form>
                     </div>
                         <!-- Content Row -->

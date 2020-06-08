@@ -45,18 +45,3 @@ class Model(models.Model):
     model = models.FilePathField()
     document = models.FileField(blank=True)
 
-class Document(models.Model):
-    """
-        Document Class to rappresent Document element, used to train CADE model
-
-        Parameters:
-        :param document: a FileField used to rappresent document file
-        :param task: reference to Task Class
-    """
-    document = models.FileField(blank=True)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=0, to_field='num_task')
-
-    def __str__(self):
-        if self.document:
-            return "Name document: %", self.document
-        return "Empty document"

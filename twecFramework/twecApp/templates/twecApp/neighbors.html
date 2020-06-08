@@ -110,16 +110,22 @@
 
                     <!-- Page heading -->
                     <h1 class = "h3 mb-0 text-gray-800">Neighbors Analysis </h1>
-                    
+
+                    <div class = "container-fluid">
+                        <h3 class = "h3 mb-0 text-gray-800">Number of Neighbors indicate the number of neighbors to show and Models
+                            is the model used to calculate neighbors of a word </h3>
+                    </div>
+
                     <!-- Content Row -->
                         <div class = "card-body">
                             <form action = "#" method="post">
                                 {% csrf_token %}
                                 <div class = "container">
-                                    {% for elem in word_form %}
-                                        {{ elem.label_tag }}
-                                        {{ elem }}
-                                    {% endfor %}
+                                    {{ word_form.word.label_tag }}
+                                    {{ word_form.word }}
+                                    <label for = "id-topn">Number of Neighbors: </label>
+                                    {{ word_form.topn }}
+                                    <label for = "modelChoice">Model: </label>
                                     <select id = "modelChoice" name = "modelChoice">
                                         {% for model in task.model_set.all %}
                                             <option value = "{{model.name}}">{{model.name }}</option>

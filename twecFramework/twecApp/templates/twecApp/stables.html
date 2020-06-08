@@ -109,20 +109,21 @@
 
                         <div class = "container-fluid">
                             Number of Neighbors indicate the number of neighbors that we want to select
-                            and models indicate the corpus of embeddings that we want to use in stables Analysis
+                            and Models indicate corpus of embeddings that we want to use in stables Analysis
                         </div>
 
                         <div class = "container-fluid">
                             <form action = "#" method = "post">
                             {% csrf_token %}
-                                {{ word_form.topk.label_tag }}
-                                {{ word_form.topk }}
-                                <input type = "submit" value = "Search">
+                                <label for = "id-topn">Number of Neighbors: </label>
+                                {{ word_form.topn }}
+                                <label for = "modelChoice">Models: </label>
                                 <select id = "modelChoice" name = "modelChoice">
                                     {% for model1, model2 in comparable_models %}
                                         <option value = "{{model1.name }}-{{model2.name}}">{{model1.name}}-{{model2.name}}</option>
                                     {% endfor %}
                                 </select>
+                                <input type = "submit" value = "Search">
                             </form>
                         </div>
                     <!-- Content Row -->

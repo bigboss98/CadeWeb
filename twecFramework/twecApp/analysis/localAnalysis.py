@@ -21,9 +21,9 @@ class CorrespondanceView(View):
             :param request: request Object 
             :param num_task: ID of task used, where there are models to use
         """
-        word_form = self.word_class()
         task = Task.objects.get(pk=num_task)
         comparable_models = calculate_comparable_models(task)
+        word_form = self.word_class()
         return render(request, 'correspondance.html', {
             'word_form': word_form,
             'task': task,
@@ -42,12 +42,11 @@ class CorrespondanceView(View):
         task = Task.objects.get(pk=num_task)
         modelChoice = request.POST['modelChoice'].split("-")
         comparable_models = calculate_comparable_models(task)
-        models = [Word2Vec.load(model.model) for model in task.model_set.all()
-                                             for modelName in modelChoice
-                                             if model.name == modelName]
+        models = [Word2Vec.load(task.model_set.get(name=modelChoice[0]).model),
+                  Word2Vec.load(task.model_set.get(name=modelChoice[1]).model)]
         if len(models) == 2: 
             result = [models[1].wv.most_similar(positive=[models[0].wv[word]], topn=topn)]
-            results = [(correspondance, word) for res in result for correspondance, el in res]
+            results = [(correspondance, word, value) for res in result for correspondance, value in res]
         else:
             results = []
         return render(request, 'correspondance.html', {
@@ -90,7 +89,8 @@ class NeighborsView(View):
         modelName = request.POST['modelChoice']
         task = Task.objects.get(pk=num_task)
 
-        models = [Word2Vec.load(model.model) for model in task.model_set.all() if model.name == modelName]
+        models = [Word2Vec.load(task.model_set.get(name=modelChoice[0]).model),
+                  Word2Vec.load(task.model_set.get(name=modelChoice[1]).model)]
 
         results = get_neighbors_set(word, models[0], topn)
         return render(request, 'neighbors.html', {
@@ -135,9 +135,8 @@ class SimilarityView(View):
         task = Task.objects.get(pk=num_task)
         comparable_models = calculate_comparable_models(task)
         modelChoice = request.POST['modelChoice'].split("-")
-        selectedModels = [Word2Vec.load(model.model) for model in task.model_set.all() 
-                                             for modelName in modelChoice
-                                             if model.name == modelName]
+        selected_models = [Word2Vec.load(task.model_set.get(name=modelChoice[0]).model),
+                           Word2Vec.load(task.model_set.get(name=modelChoice[1]).model)]
         models = [Word2Vec.load(model.model) for model in task.model_set.all()]
         results = [(word, lncs2(word, selectedModels[0], selectedModels[1], topn), c_measure(word, models))]
 
@@ -182,8 +181,7 @@ class AnalogiesView(View):
         word = request.POST['word']
         topn = int(request.POST['topn'])
         modelChoice = request.POST['modelChoice'].split("-")
-        results = []
-        #results = get_analogies(task, word, topn, modelChoice)
+        results = get_analogies(task, word, topn, modelChoice)
         return render(request, 'analogies.html', {
             'word_form': word_form,
             'task': task,
@@ -192,18 +190,21 @@ class AnalogiesView(View):
             })
 
 
-#def get_analogies(task, word, topn, modelChoice):
- #   models = [Word2Vec.load(model.model) for model in task.model_set.all()
-  #                                       for modelName in modelChoice
-   #                                      if modelName == model.name]
-   # neighbors = list(get_neighbors_set(word, models[0], topn))
-    #analogies = []
-    #if len(models) == 2:
-     #   correspondance_words = models[1].wv.most_similar(positive=[models[0].wv[word]], topn=topn)
-    #
-    #    for (word, value) in correspondance_words:
-     #       analogies.append((word, models[1].wv.most_similar(positive=[neighbors, word], topn=1)))
-   # return analogies
+def get_analogies(task, word, topn, modelChoice):
+    models = [Word2Vec.load(task.model_set.get(name=modelChoice[0]).model),
+              Word2Vec.load(task.model_set.get(name=modelChoice[1]).model)]
+    neighbors = list(get_neighbors_set(word, models[0], topn))
+    analogies = []
+    if len(models) == 2:
+        correspondance_words = models[1].wv.most_similar(positive=[models[0].wv[word]], topn=topn)
+        for (word, value) in correspondance_words:
+            try:
+                analogies_word = models[1].wv.most_similar(positive=word, negative = neighbors, topn=topn)
+            except:
+                print("Word not in Dictionary")
+            else:
+                analogies.append((word, analogies_word))
+    return analogies
 
 def calculate_comparable_models(task):
     num_model = 0
