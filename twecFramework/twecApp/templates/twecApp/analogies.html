@@ -110,34 +110,52 @@
                     <div class = "container-fluid">
                         <form action = "#" method = "post">
                             {% csrf_token %}
-                            {% for elem in word_form %}
-                                {{ elem.label_tag }}
-                                {{ elem }}
-                            {% endfor %}
+                            <div class = "row">
+                                {{ word_form.word.label_tag }}
+                                {{ word_form.word }}
+                                <label for = "model1"> Model: </label>
+                                <select id = "model1" name = "model1">
+                                    {% for model in task.model_set.all %}
+                                        <option value = "{{model.name}}">{{model.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class = "row">
+                                <label for ="positive">Positive Word: </label>
+                                <input id="positive" type = "text" name = "positive" maxlength = 200 required="">
+                                <label for = "model2"> Model: </label>
+                                <select id = "model2" name = "model2">
+                                    {% for model in task.model_set.all %}
+                                        <option value = "{{model.name}}">{{model.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class = "row">
+                                <label for = "negative">Negative Word: </label>
+                                <input id = "negative" type = "text" name = "negative" maxlength = 200 required = "">
+                                <label for = "model3"> Model: </label>
+                                <select id = "model3" name = "model3">
+                                    {% for model in task.model_set.all %}
+                                        <option value = "{{model.name}}">{{model.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
                             <input type = "submit" value = "Search">
-                            <select id = "modelChoice" name = "modelChoice">
-                                {% for model1, model2 in comparable_models %}
-                                    <option value = "{{model1.name }}-{{model2.name}}">{{model1.name}}-{{model2.name}}</option>
-                                {% endfor %}
-                            </select>
 
                         </form>
                     <!-- Content Row -->
                         <div class = "card-body">
                             <div class = "table-responsive">
                                 <table class = "table table-bordered" id = "dataTable" width = "100%" cellspacing = "0">
-                                    <thead>
+                                    <thead class="text-primary">
                                         <tr>
                                             <th> Word </th>
                                             <th> Analogies word </th>
                                         </tr>
                                     </thead>
-                                    <tfoot>                                                                                                                                                
-                                        <tr>
-                                            <th> Word </th>
-                                            <th> Corrispective word </th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         {% for word, res in results %}
                                             <tr>

@@ -178,10 +178,9 @@ class AnalogiesView(View):
         word_form = self.word_class()
         task = Task.objects.get(pk=num_task)
         comparable_models = calculate_comparable_models(task)
-        word = request.POST['word']
-        topn = int(request.POST['topn'])
-        modelChoice = request.POST['modelChoice'].split("-")
-        results = get_analogies(task, word, topn, modelChoice)
+        words = [request.POST['word'], request.POST['positive'], request.POST['negative']]
+        modelChoice = [request.POST['model1'], request.POST['model2'], request.POST['model3']]
+        results = get_analogies(task, words, modelChoice)
         return render(request, 'analogies.html', {
             'word_form': word_form,
             'task': task,
@@ -190,21 +189,13 @@ class AnalogiesView(View):
             })
 
 
-def get_analogies(task, word, topn, modelChoice):
+def get_analogies(task, words, modelChoice):
     models = [Word2Vec.load(task.model_set.get(name=modelChoice[0]).model),
-              Word2Vec.load(task.model_set.get(name=modelChoice[1]).model)]
-    neighbors = list(get_neighbors_set(word, models[0], topn))
-    analogies = []
-    if len(models) == 2:
-        correspondance_words = models[1].wv.most_similar(positive=[models[0].wv[word]], topn=topn)
-        for (word, value) in correspondance_words:
-            try:
-                analogies_word = models[1].wv.most_similar(positive=word, negative = neighbors, topn=topn)
-            except:
-                print("Word not in Dictionary")
-            else:
-                analogies.append((word, analogies_word))
-    return analogies
+              Word2Vec.load(task.model_set.get(name=modelChoice[1]).model),
+              Word2Vec.load(task.model_set.get(name=modelChoice[2]).model)]
+    analogies = models[2].wv.most_similar(positive=words[:1], negative = words[2], topn=1)
+    return [(words[0], analogy_word) for (analogy_word, elem) in analogies]
+
 
 def calculate_comparable_models(task):
     num_model = 0
