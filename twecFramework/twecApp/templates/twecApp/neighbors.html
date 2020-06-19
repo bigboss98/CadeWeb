@@ -111,9 +111,9 @@
                     <!-- Page heading -->
                     <h1 class = "h3 mb-0 text-gray-800">Neighbors Analysis </h1>
 
-                    <div class = "container-fluid">
-                        <h3 class = "h3 mb-0 text-gray-800">Number of Neighbors indicate the number of neighbors to show and Models
-                            is the model used to calculate neighbors of a word </h3>
+                    <div class = "container-fluid text-primary">
+                        Number of Neighbors indicate the number of neighbors to show and Models
+                        is the model used to calculate neighbors of a word 
                     </div>
 
                     <!-- Content Row -->
@@ -136,16 +136,11 @@
                             </form>
                             <div class = "table-responsive">
                                 <table class = "table table-bordered" id = "dataTable" width = "100%" cellspacing = "0">
-                                    <thead>
+                                    <thead class = "text-primary">
                                         <tr>
                                             <th> Neighbor </th>
                                         </tr>
                                     </thead>
-                                    <tfoot>                                                                                                                                                
-                                        <tr>
-                                            <th> Neighbor </th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                     {% for elem in results%}
                                         <tr>
