@@ -89,9 +89,7 @@ class NeighborsView(View):
         modelName = request.POST['modelChoice']
         task = Task.objects.get(pk=num_task)
 
-        models = [Word2Vec.load(task.model_set.get(name=modelChoice[0]).model),
-                  Word2Vec.load(task.model_set.get(name=modelChoice[1]).model)]
-
+        models = [Word2Vec.load(task.model_set.get(name=modelName).model)]
         results = get_neighbors_set(word, models[0], topn)
         return render(request, 'neighbors.html', {
             'results': results,
@@ -138,7 +136,7 @@ class SimilarityView(View):
         selected_models = [Word2Vec.load(task.model_set.get(name=modelChoice[0]).model),
                            Word2Vec.load(task.model_set.get(name=modelChoice[1]).model)]
         models = [Word2Vec.load(model.model) for model in task.model_set.all()]
-        results = [(word, lncs2(word, selectedModels[0], selectedModels[1], topn), c_measure(word, models))]
+        results = [(word, lncs2(word, selected_models[0], selected_models[1], topn), c_measure(word, models))]
 
         return render(request, 'similarity.html', {
             'results': results,
