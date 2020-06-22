@@ -19,7 +19,6 @@ django-background-tasks==1.2.5
 django-bootstrap4==1.1.1
 django-compat==1.0.15
 docutils==0.15.2
-en-core-web-sm==2.2.5
 gensim==3.6.0
 google-api-core==1.17.0
 google-auth==1.14.1
