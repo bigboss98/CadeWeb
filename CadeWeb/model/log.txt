@@ -1,0 +1,366 @@
+
+2020-06-01 15:32:20,645 : INFO : files read into PathLineSentences:compass.txt
+2020-06-01 15:32:20,645 : WARNING : consider setting layer size to a multiple of 4 for greater performance
+2020-06-01 15:32:20,647 : INFO : collecting all words and their counts
+2020-06-01 15:32:20,647 : INFO : reading file compass.txt
+2020-06-01 15:32:20,649 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2020-06-01 15:32:21,810 : INFO : collected 107349 word types from a corpus of 3005595 raw words and 1339 sentences
+2020-06-01 15:32:21,810 : INFO : Loading a fresh vocabulary
+2020-06-01 15:32:21,963 : INFO : effective_min_count=5 retains 25769 unique words (24% of original 107349, drops 81580)
+2020-06-01 15:32:21,963 : INFO : effective_min_count=5 leaves 2881683 word corpus (95% of original 3005595, drops 123912)
+2020-06-01 15:32:22,119 : INFO : deleting the raw counts dictionary of 107349 items
+2020-06-01 15:32:22,122 : INFO : sample=0.001 downsamples 40 most-common words
+2020-06-01 15:32:22,122 : INFO : downsampling leaves estimated 2053130 word corpus (71.2% of prior 2881683)
+2020-06-01 15:32:22,204 : INFO : estimated required memory for 25769 words and 30 dimensions: 19069060 bytes
+2020-06-01 15:32:22,205 : INFO : resetting layer weights
+2020-06-01 15:32:28,572 : INFO : reading file compass.txt
+2020-06-01 15:32:28,810 : INFO : training model with 4 workers on 25769 vocabulary and 30 features, using sg=0 hs=0 sample=0.001 negative=10 window=5
+2020-06-01 15:32:28,812 : INFO : reading file compass.txt
+2020-06-01 15:32:29,818 : INFO : EPOCH 1 - PROGRESS: at 22.84% words, 457583 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:30,819 : INFO : EPOCH 1 - PROGRESS: at 46.62% words, 468264 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:31,847 : INFO : EPOCH 1 - PROGRESS: at 69.84% words, 469226 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:32,851 : INFO : EPOCH 1 - PROGRESS: at 93.59% words, 475104 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:33,083 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:32:33,084 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:32:33,091 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:32:33,091 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:32:33,092 : INFO : EPOCH - 1 : training on 3005595 raw words (2052872 effective words) took 4.3s, 479659 effective words/s
+2020-06-01 15:32:33,093 : INFO : reading file compass.txt
+2020-06-01 15:32:34,096 : INFO : EPOCH 2 - PROGRESS: at 23.13% words, 465149 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:35,103 : INFO : EPOCH 2 - PROGRESS: at 46.31% words, 464830 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:36,106 : INFO : EPOCH 2 - PROGRESS: at 68.67% words, 464710 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:37,114 : INFO : EPOCH 2 - PROGRESS: at 92.34% words, 470946 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:37,439 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:32:37,453 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:32:37,455 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:32:37,461 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:32:37,461 : INFO : EPOCH - 2 : training on 3005595 raw words (2053167 effective words) took 4.4s, 470089 effective words/s
+2020-06-01 15:32:37,462 : INFO : reading file compass.txt
+2020-06-01 15:32:38,472 : INFO : EPOCH 3 - PROGRESS: at 23.13% words, 461920 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:39,481 : INFO : EPOCH 3 - PROGRESS: at 47.38% words, 473168 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:40,496 : INFO : EPOCH 3 - PROGRESS: at 71.01% words, 477363 words/s, in_qsize 8, out_qsize 0
+2020-06-01 15:32:41,503 : INFO : EPOCH 3 - PROGRESS: at 94.21% words, 478080 words/s, in_qsize 6, out_qsize 1
+2020-06-01 15:32:41,700 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:32:41,701 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:32:41,707 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:32:41,709 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:32:41,709 : INFO : EPOCH - 3 : training on 3005595 raw words (2052870 effective words) took 4.2s, 483419 effective words/s
+2020-06-01 15:32:41,710 : INFO : reading file compass.txt
+2020-06-01 15:32:42,722 : INFO : EPOCH 4 - PROGRESS: at 23.13% words, 461040 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:43,737 : INFO : EPOCH 4 - PROGRESS: at 47.71% words, 475029 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:44,748 : INFO : EPOCH 4 - PROGRESS: at 71.03% words, 476883 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:45,749 : INFO : EPOCH 4 - PROGRESS: at 94.52% words, 479936 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:45,941 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:32:45,944 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:32:45,952 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:32:45,952 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:32:45,953 : INFO : EPOCH - 4 : training on 3005595 raw words (2053039 effective words) took 4.2s, 483964 effective words/s
+2020-06-01 15:32:45,954 : INFO : reading file compass.txt
+2020-06-01 15:32:46,956 : INFO : EPOCH 5 - PROGRESS: at 23.13% words, 465658 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:47,962 : INFO : EPOCH 5 - PROGRESS: at 46.70% words, 470200 words/s, in_qsize 7, out_qsize 1
+2020-06-01 15:32:48,957 : INFO : EPOCH 5 - PROGRESS: at 70.17% words, 476634 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:49,964 : INFO : EPOCH 5 - PROGRESS: at 94.23% words, 482080 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:50,169 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:32:50,171 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:32:50,176 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:32:50,178 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:32:50,179 : INFO : EPOCH - 5 : training on 3005595 raw words (2053065 effective words) took 4.2s, 486045 effective words/s
+2020-06-01 15:32:50,180 : INFO : reading file compass.txt
+2020-06-01 15:32:51,193 : INFO : EPOCH 6 - PROGRESS: at 23.13% words, 460659 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:52,205 : INFO : EPOCH 6 - PROGRESS: at 47.02% words, 468298 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:53,212 : INFO : EPOCH 6 - PROGRESS: at 69.84% words, 469877 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:54,224 : INFO : EPOCH 6 - PROGRESS: at 93.27% words, 472978 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:54,466 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:32:54,475 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:32:54,482 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:32:54,482 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:32:54,482 : INFO : EPOCH - 6 : training on 3005595 raw words (2053000 effective words) took 4.3s, 477186 effective words/s
+2020-06-01 15:32:54,484 : INFO : reading file compass.txt
+2020-06-01 15:32:55,494 : INFO : EPOCH 7 - PROGRESS: at 23.13% words, 462131 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:56,503 : INFO : EPOCH 7 - PROGRESS: at 47.03% words, 470219 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:57,508 : INFO : EPOCH 7 - PROGRESS: at 70.06% words, 472861 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:32:58,522 : INFO : EPOCH 7 - PROGRESS: at 93.60% words, 475559 words/s, in_qsize 6, out_qsize 1
+2020-06-01 15:32:58,740 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:32:58,744 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:32:58,751 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:32:58,752 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:32:58,752 : INFO : EPOCH - 7 : training on 3005595 raw words (2053803 effective words) took 4.3s, 481190 effective words/s
+2020-06-01 15:32:58,754 : INFO : reading file compass.txt
+2020-06-01 15:32:59,762 : INFO : EPOCH 8 - PROGRESS: at 23.13% words, 462547 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:00,766 : INFO : EPOCH 8 - PROGRESS: at 47.02% words, 471123 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:01,788 : INFO : EPOCH 8 - PROGRESS: at 70.06% words, 470761 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:02,811 : INFO : EPOCH 8 - PROGRESS: at 93.27% words, 471173 words/s, in_qsize 8, out_qsize 0
+2020-06-01 15:33:03,040 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:03,047 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:03,053 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:03,053 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:03,053 : INFO : EPOCH - 8 : training on 3005595 raw words (2052275 effective words) took 4.3s, 477313 effective words/s
+2020-06-01 15:33:03,055 : INFO : reading file compass.txt
+2020-06-01 15:33:04,057 : INFO : EPOCH 9 - PROGRESS: at 18.98% words, 382070 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:05,081 : INFO : EPOCH 9 - PROGRESS: at 42.16% words, 421234 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:06,099 : INFO : EPOCH 9 - PROGRESS: at 65.07% words, 435168 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:07,111 : INFO : EPOCH 9 - PROGRESS: at 86.18% words, 435077 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:07,745 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:07,749 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:07,753 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:07,756 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:07,756 : INFO : EPOCH - 9 : training on 3005595 raw words (2053179 effective words) took 4.7s, 436739 effective words/s
+2020-06-01 15:33:07,758 : INFO : reading file compass.txt
+2020-06-01 15:33:08,764 : INFO : EPOCH 10 - PROGRESS: at 23.13% words, 463839 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:09,768 : INFO : EPOCH 10 - PROGRESS: at 47.05% words, 472525 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:10,787 : INFO : EPOCH 10 - PROGRESS: at 71.03% words, 478322 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:11,788 : INFO : EPOCH 10 - PROGRESS: at 94.23% words, 479661 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:11,989 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:11,991 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:12,014 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:12,017 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:12,018 : INFO : EPOCH - 10 : training on 3005595 raw words (2053600 effective words) took 4.3s, 482080 effective words/s
+2020-06-01 15:33:12,018 : INFO : training on a 30055950 raw words (20530870 effective words) took 43.2s, 475167 effective words/s
+2020-06-01 15:33:12,020 : WARNING : consider setting layer size to a multiple of 4 for greater performance
+2020-06-01 15:33:12,020 : INFO : collecting all words and their counts
+2020-06-01 15:33:12,021 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2020-06-01 15:33:12,579 : INFO : collected 72026 word types from a corpus of 1419500 raw words and 296 sentences
+2020-06-01 15:33:12,579 : INFO : Loading a fresh vocabulary
+2020-06-01 15:33:12,687 : INFO : effective_min_count=5 retains 23312 unique words (32% of original 72026, drops 48714)
+2020-06-01 15:33:12,687 : INFO : effective_min_count=5 leaves 1351289 word corpus (95% of original 1419500, drops 68211)
+2020-06-01 15:33:12,774 : INFO : deleting the raw counts dictionary of 72026 items
+2020-06-01 15:33:12,776 : INFO : sample=0.001 downsamples 38 most-common words
+2020-06-01 15:33:12,776 : INFO : downsampling leaves estimated 951299 word corpus (70.4% of prior 1351289)
+2020-06-01 15:33:12,851 : INFO : estimated required memory for 23312 words and 30 dimensions: 17250880 bytes
+2020-06-01 15:33:12,851 : INFO : resetting layer weights
+2020-06-01 15:33:18,954 : INFO : training model with 4 workers on 23312 vocabulary and 30 features, using sg=0 hs=0 sample=0.001 negative=10 window=5
+2020-06-01 15:33:19,966 : INFO : EPOCH 1 - PROGRESS: at 48.97% words, 462569 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:20,929 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:20,942 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:20,951 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:20,952 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:20,953 : INFO : EPOCH - 1 : training on 1419500 raw words (950894 effective words) took 2.0s, 476294 effective words/s
+2020-06-01 15:33:21,975 : INFO : EPOCH 2 - PROGRESS: at 48.97% words, 457560 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:22,927 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:22,931 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:22,937 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:22,952 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:22,952 : INFO : EPOCH - 2 : training on 1419500 raw words (951201 effective words) took 2.0s, 475974 effective words/s
+2020-06-01 15:33:23,960 : INFO : EPOCH 3 - PROGRESS: at 48.36% words, 458757 words/s, in_qsize 7, out_qsize 2
+2020-06-01 15:33:24,917 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:24,923 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:24,943 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:24,949 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:24,949 : INFO : EPOCH - 3 : training on 1419500 raw words (951808 effective words) took 2.0s, 477081 effective words/s
+2020-06-01 15:33:25,951 : INFO : EPOCH 4 - PROGRESS: at 48.97% words, 467027 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:26,910 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:26,915 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:26,930 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:26,936 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:26,936 : INFO : EPOCH - 4 : training on 1419500 raw words (950977 effective words) took 2.0s, 478889 effective words/s
+2020-06-01 15:33:27,949 : INFO : EPOCH 5 - PROGRESS: at 48.97% words, 462551 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:28,911 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:28,923 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:28,933 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:28,936 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:28,936 : INFO : EPOCH - 5 : training on 1419500 raw words (951672 effective words) took 2.0s, 476372 effective words/s
+2020-06-01 15:33:29,956 : INFO : EPOCH 6 - PROGRESS: at 48.97% words, 459495 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:30,915 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:30,925 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:30,947 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:30,948 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:30,948 : INFO : EPOCH - 6 : training on 1419500 raw words (951294 effective words) took 2.0s, 473158 effective words/s
+2020-06-01 15:33:31,953 : INFO : EPOCH 7 - PROGRESS: at 48.36% words, 459325 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:32,957 : INFO : EPOCH 7 - PROGRESS: at 95.16% words, 451739 words/s, in_qsize 8, out_qsize 1
+2020-06-01 15:33:33,042 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:33,051 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:33,064 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:33,078 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:33,079 : INFO : EPOCH - 7 : training on 1419500 raw words (950879 effective words) took 2.1s, 446622 effective words/s
+2020-06-01 15:33:34,110 : INFO : EPOCH 8 - PROGRESS: at 40.03% words, 371779 words/s, in_qsize 5, out_qsize 2
+2020-06-01 15:33:35,114 : INFO : EPOCH 8 - PROGRESS: at 87.86% words, 412807 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:35,300 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:35,307 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:35,329 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:35,332 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:35,332 : INFO : EPOCH - 8 : training on 1419500 raw words (951925 effective words) took 2.3s, 422671 effective words/s
+2020-06-01 15:33:36,346 : INFO : EPOCH 9 - PROGRESS: at 50.14% words, 473088 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:37,358 : INFO : EPOCH 9 - PROGRESS: at 95.16% words, 448333 words/s, in_qsize 6, out_qsize 1
+2020-06-01 15:33:37,411 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:37,420 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:37,430 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:37,437 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:37,437 : INFO : EPOCH - 9 : training on 1419500 raw words (951165 effective words) took 2.1s, 452324 effective words/s
+2020-06-01 15:33:38,446 : INFO : EPOCH 10 - PROGRESS: at 49.51% words, 469325 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:39,359 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:39,376 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:39,385 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:39,395 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:39,396 : INFO : EPOCH - 10 : training on 1419500 raw words (951845 effective words) took 2.0s, 486345 effective words/s
+2020-06-01 15:33:39,396 : INFO : training on a 14195000 raw words (9513660 effective words) took 20.4s, 465415 effective words/s
+2020-06-01 15:33:39,396 : INFO : saving Word2Vec object under model/text_acad_F8PrIHQ.model, separately None
+2020-06-01 15:33:39,396 : INFO : not storing attribute vectors_norm
+2020-06-01 15:33:39,396 : INFO : not storing attribute cum_table
+2020-06-01 15:33:39,509 : INFO : saved model/text_acad_F8PrIHQ.model
+2020-06-01 15:33:39,630 : WARNING : consider setting layer size to a multiple of 4 for greater performance
+2020-06-01 15:33:39,631 : INFO : collecting all words and their counts
+2020-06-01 15:33:39,632 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2020-06-01 15:33:40,273 : INFO : collected 62294 word types from a corpus of 1586095 raw words and 1043 sentences
+2020-06-01 15:33:40,274 : INFO : Loading a fresh vocabulary
+2020-06-01 15:33:40,380 : INFO : effective_min_count=5 retains 22263 unique words (35% of original 62294, drops 40031)
+2020-06-01 15:33:40,380 : INFO : effective_min_count=5 leaves 1530394 word corpus (96% of original 1586095, drops 55701)
+2020-06-01 15:33:40,475 : INFO : deleting the raw counts dictionary of 62294 items
+2020-06-01 15:33:40,477 : INFO : sample=0.001 downsamples 49 most-common words
+2020-06-01 15:33:40,478 : INFO : downsampling leaves estimated 1085902 word corpus (71.0% of prior 1530394)
+2020-06-01 15:33:40,547 : INFO : estimated required memory for 22263 words and 30 dimensions: 16474620 bytes
+2020-06-01 15:33:40,547 : INFO : resetting layer weights
+2020-06-01 15:33:46,425 : INFO : training model with 4 workers on 22263 vocabulary and 30 features, using sg=0 hs=0 sample=0.001 negative=10 window=5
+2020-06-01 15:33:47,435 : INFO : EPOCH 1 - PROGRESS: at 43.47% words, 468245 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:48,441 : INFO : EPOCH 1 - PROGRESS: at 89.06% words, 479882 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:48,634 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:48,638 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:48,647 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:48,651 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:48,651 : INFO : EPOCH - 1 : training on 1586095 raw words (1086050 effective words) took 2.2s, 488219 effective words/s
+2020-06-01 15:33:49,652 : INFO : EPOCH 2 - PROGRESS: at 44.51% words, 484186 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:50,655 : INFO : EPOCH 2 - PROGRESS: at 90.22% words, 489340 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:50,819 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:50,837 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:50,837 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:50,854 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:50,854 : INFO : EPOCH - 2 : training on 1586095 raw words (1086693 effective words) took 2.2s, 493517 effective words/s
+2020-06-01 15:33:51,859 : INFO : EPOCH 3 - PROGRESS: at 44.51% words, 481498 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:52,861 : INFO : EPOCH 3 - PROGRESS: at 82.33% words, 445700 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:53,225 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:53,226 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:53,234 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:53,238 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:53,238 : INFO : EPOCH - 3 : training on 1586095 raw words (1085447 effective words) took 2.4s, 455561 effective words/s
+2020-06-01 15:33:54,242 : INFO : EPOCH 4 - PROGRESS: at 42.86% words, 464244 words/s, in_qsize 8, out_qsize 0
+2020-06-01 15:33:55,267 : INFO : EPOCH 4 - PROGRESS: at 89.06% words, 476845 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:55,465 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:55,474 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:55,483 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:55,486 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:55,486 : INFO : EPOCH - 4 : training on 1586095 raw words (1085879 effective words) took 2.2s, 483361 effective words/s
+2020-06-01 15:33:56,493 : INFO : EPOCH 5 - PROGRESS: at 43.27% words, 467808 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:57,494 : INFO : EPOCH 5 - PROGRESS: at 89.06% words, 481990 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:57,689 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:57,692 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:57,700 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:57,702 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:57,702 : INFO : EPOCH - 5 : training on 1586095 raw words (1086049 effective words) took 2.2s, 490366 effective words/s
+2020-06-01 15:33:58,724 : INFO : EPOCH 6 - PROGRESS: at 43.47% words, 462457 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:59,737 : INFO : EPOCH 6 - PROGRESS: at 89.62% words, 478054 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:33:59,917 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:33:59,921 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:33:59,927 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:33:59,928 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:33:59,928 : INFO : EPOCH - 6 : training on 1586095 raw words (1085045 effective words) took 2.2s, 487749 effective words/s
+2020-06-01 15:34:00,947 : INFO : EPOCH 7 - PROGRESS: at 38.78% words, 414287 words/s, in_qsize 6, out_qsize 1
+2020-06-01 15:34:01,957 : INFO : EPOCH 7 - PROGRESS: at 85.22% words, 456583 words/s, in_qsize 6, out_qsize 1
+2020-06-01 15:34:02,228 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:34:02,231 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:34:02,238 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:34:02,250 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:34:02,251 : INFO : EPOCH - 7 : training on 1586095 raw words (1086008 effective words) took 2.3s, 468016 effective words/s
+2020-06-01 15:34:03,259 : INFO : EPOCH 8 - PROGRESS: at 43.47% words, 468430 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:34:04,263 : INFO : EPOCH 8 - PROGRESS: at 89.02% words, 480614 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:34:04,464 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:34:04,475 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:34:04,478 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:34:04,484 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:34:04,484 : INFO : EPOCH - 8 : training on 1586095 raw words (1086333 effective words) took 2.2s, 486667 effective words/s
+2020-06-01 15:34:05,493 : INFO : EPOCH 9 - PROGRESS: at 43.89% words, 473840 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:34:06,502 : INFO : EPOCH 9 - PROGRESS: at 87.87% words, 473328 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:34:06,807 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:34:06,808 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:34:06,821 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:34:06,823 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:34:06,823 : INFO : EPOCH - 9 : training on 1586095 raw words (1085995 effective words) took 2.3s, 464628 effective words/s
+2020-06-01 15:34:07,830 : INFO : EPOCH 10 - PROGRESS: at 44.51% words, 480623 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:34:08,830 : INFO : EPOCH 10 - PROGRESS: at 89.62% words, 485021 words/s, in_qsize 7, out_qsize 0
+2020-06-01 15:34:09,017 : INFO : worker thread finished; awaiting finish of 3 more threads
+2020-06-01 15:34:09,020 : INFO : worker thread finished; awaiting finish of 2 more threads
+2020-06-01 15:34:09,028 : INFO : worker thread finished; awaiting finish of 1 more threads
+2020-06-01 15:34:09,031 : INFO : worker thread finished; awaiting finish of 0 more threads
+2020-06-01 15:34:09,031 : INFO : EPOCH - 10 : training on 1586095 raw words (1085714 effective words) took 2.2s, 492142 effective words/s
+2020-06-01 15:34:09,031 : INFO : training on a 15860950 raw words (10859213 effective words) took 22.6s, 480361 effective words/s
+2020-06-01 15:34:09,031 : INFO : saving Word2Vec object under model/text_blog.model, separately None
+2020-06-01 15:34:09,031 : INFO : not storing attribute vectors_norm
+2020-06-01 15:34:09,031 : INFO : not storing attribute cum_table
+2020-06-01 15:34:09,132 : INFO : saved model/text_blog.model
+2020-06-01 15:34:09,918 : INFO : Ran task and deleting twecApp.train.train
+2020-06-01 15:34:10,077 : INFO : Running twecApp.train.train
+2020-06-01 15:34:10,764 : ERROR : Rescheduling twecApp.train.train
+Traceback (most recent call last):
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/background_task/tasks.py", line 43, in bg_runner
+    func(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/twecFramework/twecApp/train.py", line 29, in train
+    preproc = SimpleSpacyCleaner("en_core_web_sm")
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/query.py", line 415, in get
+    raise self.model.DoesNotExist(
+twecApp.models.Task.DoesNotExist: Task matching query does not exist.
+2020-06-01 15:34:10,897 : WARNING : Rescheduling task twecApp.train.train for 0:04:21 later at 2020-06-01 15:38:31.897175+00:00
+2020-06-01 15:34:11,144 : INFO : Running twecApp.train.train
+2020-06-01 15:34:11,921 : ERROR : Rescheduling twecApp.train.train
+Traceback (most recent call last):
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/background_task/tasks.py", line 43, in bg_runner
+    func(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/twecFramework/twecApp/train.py", line 29, in train
+    preproc = SimpleSpacyCleaner("en_core_web_sm")
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/query.py", line 415, in get
+    raise self.model.DoesNotExist(
+twecApp.models.Task.DoesNotExist: Task matching query does not exist.
+2020-06-01 15:34:12,041 : WARNING : Rescheduling task twecApp.train.train for 0:00:21 later at 2020-06-01 15:34:33.041312+00:00
+2020-06-01 15:34:12,278 : INFO : Running twecApp.train.train
+2020-06-01 15:34:13,054 : ERROR : Rescheduling twecApp.train.train
+Traceback (most recent call last):
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/background_task/tasks.py", line 43, in bg_runner
+    func(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/twecFramework/twecApp/train.py", line 29, in train
+    preproc = SimpleSpacyCleaner("en_core_web_sm")
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/query.py", line 415, in get
+    raise self.model.DoesNotExist(
+twecApp.models.Task.DoesNotExist: Task matching query does not exist.
+2020-06-01 15:34:13,163 : WARNING : Rescheduling task twecApp.train.train for 0:10:30 later at 2020-06-01 15:44:43.163331+00:00
+2020-06-01 15:34:33,534 : INFO : Running twecApp.train.train
+2020-06-01 15:34:34,337 : ERROR : Rescheduling twecApp.train.train
+Traceback (most recent call last):
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/background_task/tasks.py", line 43, in bg_runner
+    func(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/twecFramework/twecApp/train.py", line 29, in train
+    preproc = SimpleSpacyCleaner("en_core_web_sm")
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/query.py", line 415, in get
+    raise self.model.DoesNotExist(
+twecApp.models.Task.DoesNotExist: Task matching query does not exist.
+2020-06-01 15:34:34,475 : WARNING : Rescheduling task twecApp.train.train for 0:01:26 later at 2020-06-01 15:36:00.474993+00:00
+2020-06-01 15:36:05,080 : INFO : Running twecApp.train.train
+2020-06-01 15:36:05,903 : ERROR : Rescheduling twecApp.train.train
+Traceback (most recent call last):
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/background_task/tasks.py", line 43, in bg_runner
+    func(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/twecFramework/twecApp/train.py", line 29, in train
+    preproc = SimpleSpacyCleaner("en_core_web_sm")
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/query.py", line 415, in get
+    raise self.model.DoesNotExist(
+twecApp.models.Task.DoesNotExist: Task matching query does not exist.
+2020-06-01 15:36:06,021 : WARNING : Rescheduling task twecApp.train.train for 0:04:21 later at 2020-06-01 15:40:27.021586+00:00
+2020-06-01 15:38:36,794 : INFO : Running twecApp.train.train
+2020-06-01 15:38:37,599 : ERROR : Rescheduling twecApp.train.train
+Traceback (most recent call last):
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/background_task/tasks.py", line 43, in bg_runner
+    func(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/twecFramework/twecApp/train.py", line 29, in train
+    preproc = SimpleSpacyCleaner("en_core_web_sm")
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/bigboss98/Stage/twecFramework/env/lib/python3.8/site-packages/django/db/models/query.py", line 415, in get
+    raise self.model.DoesNotExist(
+twecApp.models.Task.DoesNotExist: Task matching query does not exist.
+2020-06-01 15:38:37,712 : WARNING : Rescheduling task twecApp.train.train for 0:10:30 later at 2020-06-01 15:49:07.712532+00:00

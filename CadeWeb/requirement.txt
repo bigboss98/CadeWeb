@@ -1,0 +1,17 @@
+gensim @ git+https://github.com/valedica/gensim.git
+cade @ git+https://github.com/vinid/cade@68ed11e0f309f93108d8bf82fc8ac02ffe120283
+Cython==0.29.17
+Django==3.0.5
+django-background-tasks==1.2.5
+django-compat==1.0.15
+docutils==0.15.2
+idna==2.9
+matplotlib==3.2.1
+nltk==3.4.5
+numpy==1.18.3
+python-dateutil==2.8.1
+requests==2.23.0
+scikit-learn==0.22.2.post1
+scipy==1.4.1
+spacy==2.2.4
+spacy-lookups-data==0.2.0
